@@ -35,4 +35,21 @@ public class StudentController {
     public void delete(@PathVariable Long id) {
         studentRepository.deleteById(id);
     }
+
+    @PutMapping("/{id}")
+    public Student update(@PathVariable Long id, @RequestBody @Valid Student studentDetails) {
+
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        student.setName(studentDetails.getName());
+        student.setEmail(studentDetails.getEmail());
+
+        return studentRepository.save(student);
+    }
+
+    @GetMapping("/search")
+    public List<Student> searchByName(@RequestParam String name) {
+        return studentRepository.findByName(name);
+    }
 }
