@@ -10,7 +10,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNullgit
+    @NotNull
     @Size(min = 2, max = 50)
     private String name;
 
